@@ -13,9 +13,9 @@ root.render(
   <React.StrictMode>
     <ErrorPage>
     <HelmetProvider>
-    
+    <BrowserRouter>
         <App />
-    
+    </BrowserRouter>
     </HelmetProvider>
     </ErrorPage>
   </React.StrictMode>
