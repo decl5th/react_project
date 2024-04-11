@@ -15,22 +15,18 @@ const Login = loadable(() => import('./member/pages/Login'));
 
 /* 회원 페이지 D */
 
-
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout/>}>
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<Main />} /> {/* 메인 페이지 */}
-        
         {/* 회원 페이지 B */}
-        <Route path='member/'>
-          <Route path='join'element={<Join />} />
-          <Route path='login'element={<Login />} />
+        <Route path="member/">
+          <Route path="join" element={<Join />} />
+          <Route path="login" element={<Login />} />
         </Route>
         {/* 회원 페이지 D */}
-
-        <Route path='*' element={<NotFound />} /> {/* 없는 페이지 */}
-
+        <Route path="*" element={<NotFound />} /> {/* 없는 페이지 */}
       </Route>
     </Routes>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = () => {
-    return <Header>헤더</Header>;
+  return <header>헤더</header>;
 };
 
 export default React.memo(Header);
