@@ -20,11 +20,16 @@
     - immer : 불변성 관리 (기존값만 변경해도 새로운 객체 생성)
     - react-icons : 리액트에서 제공하는 아이콘 라이브러리
     - @loadable/component : 지연로딩
+    - react-helmet-async : head 태그 내의 특정태그의 내용을 변경 시에 설정
 
-- 의존성 라이브러리 설치 
+- 의존성 라이브러리 설치 구문 
 ```
 yarn add rect-router-dom sass styled-components classnames immer react-icons @loadable/component
+yarn add react-helmet-async
 ```
+
+# react-helmet-async 설정
+    -src/index.js
 
 
 # Getting Started with Create React App
