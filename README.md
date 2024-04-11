@@ -1,70 +1,169 @@
-# Getting Started with Create React App
+#설정
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## .prettierrc 설정
 
-## Available Scripts
+```json (주석 기호)
 
-In the project directory, you can run:
+{
+    "singleQuote": true,
+    "semi": true,
+    "useTabs": false,
+    "tabWidth": 2,
+    "trailingComma": "all"
+}
 
-### `yarn start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 의존성 : 필요 라이브러리
+    - react-router-dom : 라우터
+    - sass, styled-components, classnames : 스타일링 목적
+    - immer : 불변성 관리 (기존값만 변경해도 새로운 객체 생성)
+    - react-icons : 리액트에서 제공하는 아이콘 라이브러리
+    - @loadable/component : 지연로딩
+    - react-helmet-async : head 태그 내의 특정태그의 내용을 변경 시에 설정
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 의존성 라이브러리 설치 구문 
+```
+yarn add rect-router-dom sass styled-components classnames immer react-icons @loadable/component
+yarn add react-helmet-async
+```
 
-### `yarn test`
+## react-helmet-async 설정
+    -src/index.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+``` jsx
+    
+import { HelmetProvider } from 'react-helmet-async';
 
-### `yarn build`
+root.render(
+  <React.StrictMode>
+    <HelmetProvider>
+    <App />
+    </HelmetProvider>
+  </React.StrictMode>
+);
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 메세지, 다국어 처리
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 의존성 
+    - i18next, react-i18next
+    설치 구문
 
-### `yarn eject`
+    ```
+    yarn add i18next react-i18next
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 언어파일 생성
+    - src/langs/ko, src/langs/en 폴더 생성
+    - 각 폴더별로 공통 문구 - common.js, 검증 문구 - validations.js, 에러 문구 - errors.js
+    - 언어파일 통합: ex) src/lnags/ko/index.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ ``` js
+    import commons from "./commons";
+import validations from "./validations";
+import errors from "./errors";
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+const ko = {  ...commons, ...validations, ...errors
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+} ;
 
-## Learn More
+export default ko;
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 설정 파일 구성 : src/i18n.js
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+import i18n from 'i18next';
+import { initReactI18next} from 'react-i18next';
+import ko from './langs/ko';
+import en from './langs/en';
 
-### Code Splitting
+const resources = {
+    en: {
+        translation: en,
+    },
+    ko: {
+        translation: ko,
+    },
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+i18n.use(initReactI18next).init({
+    resources, // == resources: resources
+    lng: 'ko',
+});
+```
 
-### Analyzing the Bundle Size
+- 설정 반영 : src/index.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```js
+...
 
-### Making a Progressive Web App
+import './i18m'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+...
+```
 
-### Advanced Configuration
+- 적용하기: useTranslation 훅 이용 / react-i18next
+    - t : 메세지 조회 함수
+    - i18n : 편의 기능 객체, changeLanguage(..) : 언어 변경 기능
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```js
+    import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 
-### Deployment
+const App = () => {
+  const { t, i18n } = useTranslation();
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  return (
+    <>
+      <Helmet>
+        <title>사이트 제목 변경 테스트!</title>
+      </Helmet>
+      <div>{t('아이디')}</div>
+      <div>{t('약관에_동의')}</div>
+      <div>{t('없는_문구')}</div>
+      <button type="button" onClick={() => i18n.changeLanguage('ko')}>
+        한국어
+      </button>
+      <button type="button" onClick={() => i18n.changeLanguage('en')}>
+        English
+      </button>
+    </>
+  );
+};
 
-### `yarn build` fails to minify
+export default App;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 레이아웃 구성
+    - src/layouts/MainLayout.js
+    - src/outlines/Header.js
+    - src/outlines/Footer.js
+# 라우팅 구성
+
+## 설정
+- src/index.js : BrowserRouter 컴포넌트로 감싸기
+
+```jsx
+...
+import {BrowserRouter} from 'react-router-dom;
+... 
+
+## 메인페이지
+
+## 회원
+- /member/join : 회원가입
+- /member/login : 로그인
+
+## 없는 페이지
+- * : 없는 페이지 - commons/pages/NotFound.js
+
+## 에러페이지
+> class형 컴포넌트 - componentDidCatch 사용
+
+- commons/pages/Error.js
+- commons/components/ErrorDisplay.js 
+
+
