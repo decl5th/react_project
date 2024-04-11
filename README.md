@@ -109,6 +109,14 @@ import './i18m'
     - t : 메세지 조회 함수
     - i18n : 편의 기능 객체, changeLanguage(..) : 언어 변경 기능
 
+# 레이아웃 구성
+
+# 라우팅 구성
+    -src/layouts/MainLayout.js
+## 회원
+- /member/join : 회원가입
+- /member/login : 로그인
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
