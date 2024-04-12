@@ -33,3 +33,9 @@ img {
   border: 0;
 }
 
+.layout-width {
+  max-width: 1200px;
+  min-width: 1000px;
+  margin: 0 auto; /* 가운데 배치 */
+}
+
