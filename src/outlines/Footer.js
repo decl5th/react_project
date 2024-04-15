@@ -1,7 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
+
+const FooterBox = styled.footer`
+  min-height: 250px; 
+  background: #FAF0E6;
+
+`;
 
 const Footer = () => {
-  return <footer>푸터</footer>; // 무한로딩 이유 : Footer을 리턴에서 footer의 태그명을 선언자로 했기 때문에 무한 반복이 이루어짐 Footer와 footer 구분 유의
+  return <FooterBox>푸터</FooterBox>; 
 };
 
 export default React.memo(Footer);
