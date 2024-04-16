@@ -11,14 +11,13 @@ export const color = {
 };
 
 export const buttonColor = {
-    primary: [color.primary, '#fff'], 
-    secondary: [color.secondary, '#fff'],
-    success: [color.success, '#fff'],
-    danger: [color.danger, '#fff'],
-    waring: [color.warning, '#212529'],
-    info: [color.info, '#fff'],
-    light: [color.light, '#212529'],
-    dark: [color.dark, '#fff'],
-    link: [color.link, '#007bff'],
+    primary: [color.primary, '#fff', color.primary], 
+    secondary: [color.secondary, '#fff', color.secondary],
+    success: [color.success, '#fff', color.success],
+    danger: [color.danger, '#fff', color.danger],
+    waring: [color.warning, '#212529', '#212529'],
+    info: [color.info, '#fff', color.info],
+    light: [color.light, '#212529', '#212529'],
+    dark: [color.dark, '#fff', color.dark],
 
 }; 
