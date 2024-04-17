@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import JoinForm from '../components/JoinForm';
 import { OuterBox } from '../../commons/components/LayoutBox';
 import { MainTitle } from '../../commons/components/TitleBox';
+import JoinContainer from '../containers/JoinContainer';
 
 const Join = () => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const Join = () => {
       </Helmet>
       <OuterBox>
         <MainTitle>{t('회원가입')}</MainTitle>
-        <JoinForm />
+        <JoinContainer />
       </OuterBox>
     </>
   );
