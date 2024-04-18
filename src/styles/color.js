@@ -7,6 +7,7 @@ export const color = {
     info: '#17a2b8',
     light: '#f8f9fa',
     dark: '#343a40',
+    
 
 };
 

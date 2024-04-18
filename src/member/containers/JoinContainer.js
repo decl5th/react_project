@@ -1,7 +1,7 @@
 import React, {useState, useCallback } from "react";
 import JoinForm from '../components/JoinForm';
 import { useTranslation } from "react-i18next";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const JoinContainer = () => {
     // 양식 데이터
@@ -43,10 +43,12 @@ const JoinContainer = () => {
             name: t('회원명을_입력하세요.'),
             agree: t('회원가입_약관에_동의하세요.'),
         };
+
+        // field -> email~agree 가르킴 , msg -> 위에 적혀있는 text 의미
         // (!form[field] || !form[field].trim()) -> 값의 공백 체크 및 그에 대한 반응 구현
         for (const [field, msg] of Object.entries(requireFields)) {
             // !form[field] - null, undefined, '' 체크, !form[field].trim() - '   '
-            if (!form[field] || !form[field].trim()) {
+            if (!form[field] || (typeof form[field] === 'string' && !form[field].trim())) {
                 _errors[field] = _errors[field] || [];
                 _errors[field].push(msg);
                 hasErrors = true;
@@ -66,7 +68,7 @@ const JoinContainer = () => {
         setErrors(_errors);
 
         if (hasErrors) { // 검증 실패시 가입 처리 X
-            return;
+            return; // 흐름을 끊는 역할 하단의 기능은 실행되지 않도록 
         }
 
         /* 가입처리 */
