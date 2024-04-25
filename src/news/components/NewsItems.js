@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+
 import fontSize from '../../styles/fontSize';
 const { big } = fontSize;
 
 const NewItemBox = styled.li`
+a{
   display: flex;
 
   img {
@@ -21,7 +22,7 @@ const NewItemBox = styled.li`
       margin-bottom: 20px;
     }
   }
-
+}
   & + & {
     margin-top: 30px;
   }
@@ -38,16 +39,18 @@ const NewsItems = ({ items }) => {
 };
 
 const NewsItem = ({ item }) => {
-  const navigate = useNavigate();
+  
   const { urlToImage, url, title, description } = item;
 
   return (
-    <NewItemBox onClick={() => navigate(url)}>
+    <NewItemBox>
+        <a href={url} target="_blank" rel='noreferrer'>
       <img src={urlToImage} alt={title} />
       <div className="content-box">
         <div className="title">{title}</div>
         <div className="description">{description}</div>
       </div>
+    </a>
     </NewItemBox>
   );
 };

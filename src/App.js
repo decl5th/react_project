@@ -43,7 +43,9 @@ const App = () => {
 
         {/* 마이 페이지 D */}
         {/* 뉴스 페이지  */}
-        <Route path="news" element={<News />} />
+        <Route path="news">
+         <Route path=":category?" element={<News />} />
+        /</Route>
         <Route path="*" element={<NotFound />} /> {/* 없는 페이지 */}
       </Route>
     </Routes>
