@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { color } from '../../styles/color';
 import fontSize from '../../styles/fontSize';
 
-const { primary, dark } = color;
+const { primary, dark, warning } = color;
 const { big } = fontSize;
 
 const CategoryBox = styled.nav`
@@ -22,7 +22,7 @@ const CategoryBox = styled.nav`
     padding-right: 30px;
 
     &.on {
-      color: ${primary};
+      color: ${warning};
     }
   }
 `;

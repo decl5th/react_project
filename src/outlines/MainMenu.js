@@ -7,10 +7,10 @@ import {color} from '../styles/color';
 import fontSize from "../styles/fontSize";
 
 
-const { dark, primary, light } = color;
+const { dark, primary, light, warning } = color;
 
 const MenuBox = styled.nav`
-    background: ${dark};
+    background: ${warning};
     div {
         display: flex;
         height: 50px;
@@ -22,7 +22,7 @@ const MenuBox = styled.nav`
             font-size: ${fontSize.medium};
 
             &.on {
-                background: ${primary};
+                background: ${dark};
             }
         }
 
